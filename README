@@ -2,6 +2,18 @@ dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
 
+Version: 6.0
+
+Customizations
+--------------
+This fork includes:
+* Bottom stack (TTT)
+* Bottom stack horiz (===)
+* Columns
+* Xft fonts
+* VirtualBox border redraw fix
+* Shortcuts for starting various apps/tools
+
 
 Requirements
 ------------
