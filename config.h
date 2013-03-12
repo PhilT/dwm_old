@@ -16,29 +16,36 @@ static const Bool topbar            = True;     /* False means bottom bar */
 /* tagging */
 static const char *tags[] = { "dev", "web", "misc", "logs" };
 
+/* include(s) depending on the tags array */
+#include "flextile.h"
+
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Chromium-browser",NULL,NULL,       2,            False,       -1 },
-	{ "Firefox",  NULL,       NULL,       2,            False,       -1 },
+//	{ "Chromium-browser",NULL,NULL,       2,            False,       -1 },
+//	{ "Firefox",  NULL,       NULL,       2,            False,       -1 },
 	{ "Inkscape",  NULL,       NULL,      3,            False,       -1 },
 	{ "Pcmanfm",  NULL,       NULL,       3,            False,       -1 },
 };
 
 /* layout(s) */
-static const float mfact      = 0.66667; /* factor of master area size [0.05..0.95] */
-static const int nmaster      = 1;    /* number of clients in master area */
+static const float mfact      = 0.333333; /* factor of master area size [0.05..0.95] */
+//static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
+static const int layoutaxis[] = {
+	1,    /* layout axis: 1 = x, 2 = y; negative values mirror the layout, setting the master area to the right / bottom instead of left / top */
+	2,    /* master axis: 1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle) */
+	1,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle) */
+};
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "TTT",      bstack },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "||=",      bstackhoriz },
-	{ "|||",      col },
 };
+
+
 
 /* key definitions */
 #define MODKEY Mod4Mask
@@ -56,7 +63,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, 
 static const char *termcmd[]  = { "rxvt", NULL };
 static const char *killcmd[]  = { "pkill", "-f", "startdwm", NULL };
 static const char *sublcmd[]  = { "subl", NULL };
-static const char *chromcmd[] = { "chromium-browser", NULL };
+static const char *chromcmd[] = { "chromium-browser", "--disable-accelerated-compositing", NULL };
 static const char *foxcmd[] = { "firefox", NULL };
 static const char *inkcmd[] = { "inkscape", NULL };
 static const char *pcmanfmcmd[] = { "pcmanfm", NULL };
@@ -72,8 +79,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_equal,  incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_minus,  incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -99,6 +104,12 @@ static Key keys[] = {
 	TAGKEYS(                        XK_4,                      3)
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = killcmd } },
+	{ MODKEY|ControlMask,           XK_t,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
+	{ MODKEY|ControlMask,           XK_Tab,    rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
+	{ MODKEY|ControlMask|ShiftMask, XK_Tab,    rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
+	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
+	{ MODKEY,							          XK_minus,  shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
+	{ MODKEY,           						XK_equal,  shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
 };
 
 /* button definitions */

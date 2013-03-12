@@ -1,18 +1,17 @@
-dwm - dynamic window manager
-============================
-dwm is an extremely fast, small, and dynamic window manager for X.
+This is a fork of DWM Version 6.0
 
-Version: 6.0
-
-Customizations
---------------
 This fork includes:
-* Bottom stack (TTT)
-* Bottom stack horiz (===)
-* Columns
+* Flextile
 * Xft fonts
 * VirtualBox border redraw fix
 * Shortcuts for starting various apps/tools
+
+Original README follows:
+
+
+dwm - dynamic window manager
+============================
+dwm is an extremely fast, small, and dynamic window manager for X.
 
 
 Requirements
