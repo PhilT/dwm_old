@@ -6,14 +6,18 @@ Version: 6.0
 
 Customizations
 --------------
+
 This fork includes:
+
+* Columns
 * Bottom stack (TTT)
 * Bottom stack horiz (===)
-* Columns
 * Xft fonts
 * VirtualBox border redraw fix
-* Shortcuts for starting various apps/tools
+* Shortcuts for starting various apps/tools (see config.h)
+* Push up/down to change client order
 
+Defaults to columns with nmaster 2 (3 columns: 2 main left and centre and stacking column on the right).
 
 Requirements
 ------------
