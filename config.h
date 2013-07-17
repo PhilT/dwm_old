@@ -70,7 +70,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = killcmd } },
 
 // APPS
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },    // Terminal
+	{ MODKEY,                       XK_c,      spawn,          {.v = termcmd } },    // Terminal
 	{ MODKEY,                       XK_f,      spawn,          {.v = pcmanfmcmd } }, // File Browser
 	{ MODKEY,                       XK_t,      spawn,          {.v = sublcmd } },    // Text Editor
 	{ MODKEY,                       XK_w,      spawn,          {.v = chromcmd } },   // Web browser
@@ -87,7 +87,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_minus,  incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ControlMask,           XK_c,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
