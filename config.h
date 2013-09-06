@@ -23,13 +23,13 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
 	{ "Chromium-browser",NULL,NULL,       2,            False,       -1 },
 	{ "Firefox",  NULL,       NULL,       2,            False,       -1 },
-	{ "Inkscape",  NULL,       NULL,      3,            False,       -1 },
+	{ "Inkscape", NULL,       NULL,       3,            False,       -1 },
 	{ "Pcmanfm",  NULL,       NULL,       3,            False,       -1 },
 };
 
 /* layout(s) */
 static const float mfact      = 0.66667; /* factor of master area size [0.05..0.95] */
-static const int nmaster      = 2;    /* number of clients in master area */
+static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
@@ -62,7 +62,7 @@ static const char *chromcmd[] = { "google-chrome", "--disable-accelerated-compos
 //static const char *foxcmd[] = { "firefox", NULL };
 static const char *inkcmd[] = { "inkscape", NULL };
 static const char *gimpcmd[] = { "gimp", NULL };
-static const char *pcmanfmcmd[] = { "pcmanfm", NULL };
+static const char *pcmanfmcmd[] = { "dbus-launch", "pcmanfm", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -105,10 +105,10 @@ static Key keys[] = {
 // TAGS / MONITORS
 	// { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	// { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	// { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	// { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	// { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	// TAGKEYS(                        XK_1,                      0)
 	// TAGKEYS(                        XK_2,                      1)
 	// TAGKEYS(                        XK_3,                      2)
